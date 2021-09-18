@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
 })
 export class TalkroomService {
   private talksAllData: ITalk[] = [];
-  private perPage = 10;
+  private perPage = 30;
 
   constructor() {
     this.talksAllData = this.createTalksFromDummyText();
