@@ -82,7 +82,7 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter {
     // ion-contentの全スクロール量から、配列追加前のスクロール量を削除したポイントへ移動
     const toPosition = scrollElement.scrollHeight - scrollAmount;
 
-    await this.content.scrollByPoint(0, toPosition, 0);
+    await this.content.scrollByPoint(0, toPosition, 10);
     event.target.complete();
   }
 
