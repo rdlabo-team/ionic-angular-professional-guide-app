@@ -11,6 +11,7 @@
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" position="top" *ngIf="talks.length >= 30 && this.isReady">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
+  <div class="ion-text-center ion-padding" *ngIf="talks.length === 0 && this.isReady"><ion-spinner></ion-spinner></div>
 
   <ul class="talk" *ngIf="talks.length > 0">
     <li
