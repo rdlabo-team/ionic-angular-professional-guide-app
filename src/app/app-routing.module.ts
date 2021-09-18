@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'talkroom',
+    loadChildren: () => import('./talkroom/talkroom.module').then((m) => m.TalkroomPageModule),
+  },
 ];
 
 @NgModule({

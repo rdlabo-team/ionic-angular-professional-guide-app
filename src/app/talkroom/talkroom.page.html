@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>トークルーム</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" position="top" *ngIf="talks.length >= 10 && this.isReady">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ul class="talk" *ngIf="talks.length > 0">
+    <li
+      *ngFor="let item of talks; trackBy: trackByFn"
+      class="{{ item.profile.userId === userId ? 'talk-ask' : 'talk-reply' }}"
+    >
+      <ion-avatar slot="start" *ngIf="item.profile.userId !== userId">
+        <ion-img [src]="item.profile.photo" alt=""></ion-img>
+      </ion-avatar>
+      <div class="talk-body selectable" [innerHTML]="item.body.trim()"></div>
+      <span class="talk-created">
+        <ng-container *ngIf="item.readCount > 0 && item.profile.userId === userId">既読<br /></ng-container>
+        {{ item.createdAt | date: 'a HH:mm' }}
+      </span>
+    </li>
+  </ul>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <form #f="ngForm">
+      <ion-textarea
+        [(ngModel)]="talkBody"
+        name="talkBody"
+        autoGrow="true"
+        placeholder="トーク"
+        required
+        *ngIf="isReady"
+      ></ion-textarea>
+    </form>
+    <ion-buttons slot="end" class="ion-align-self-end">
+      <ion-button fill="clear" color="primary" [disabled]="isLoading || !f.form.valid" (click)="sendTalk(talkBody)">
+        <ion-icon size="small" name="send" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
