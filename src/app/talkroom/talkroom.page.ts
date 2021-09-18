@@ -77,7 +77,7 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter {
       this.talks = this.talkroomService.arrayConcatById<ITalk>(this.talks, talks, 'id', 'ASC');
     }
 
-    await new Promise((resolve) => setTimeout(resolve));
+    await new Promise((resolve) => requestAnimationFrame(resolve));
 
     // ion-contentの全スクロール量から、配列追加前のスクロール量を削除したポイントへ移動
     const toPosition = scrollElement.scrollHeight - scrollAmount;
