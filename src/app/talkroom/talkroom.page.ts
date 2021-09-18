@@ -33,7 +33,7 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter {
     this.getTalks(0).then((data) => {
       this.talks = this.talks.filter((v) => v.id !== 0);
       this.talks = this.talkroomService.arrayConcatById<ITalk>(this.talks, data, 'id', 'ASC');
-      this.content.scrollToBottom();
+      requestAnimationFrame(() => this.content.scrollToBottom());
     });
   }
 
@@ -50,7 +50,7 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter {
         photo: '/assets/shapes.svg',
       },
     });
-    setTimeout(() => this.content.scrollToBottom());
+    requestAnimationFrame(() => this.content.scrollToBottom());
     const result = this.talkroomService
       .post(body)
       .pipe(first())
@@ -82,7 +82,7 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter {
     // ion-contentの全スクロール量から、配列追加前のスクロール量を削除したポイントへ移動
     const toPosition = scrollElement.scrollHeight - scrollAmount;
 
-    await this.content.scrollByPoint(0, toPosition, 10);
+    await this.content.scrollByPoint(0, toPosition, 0);
     event.target.complete();
   }
 
