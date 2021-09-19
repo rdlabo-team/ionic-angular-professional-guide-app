@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "fmt": "prettier --parser typescript --write \"./src/**/*.ts\" &&  prettier --parser angular --write \"./src/**/*.html\"",
-    "cap": "npm run license && ng build --configuration=production && cap copy"
+    "cap": "ng build --configuration=production && cap copy"
   },
   "private": true,
   "dependencies": {
