@@ -1,16 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonContent, ViewDidEnter, ViewWillEnter, Platform } from '@ionic/angular';
+import { IonContent, ViewDidEnter, ViewWillEnter, Platform, ViewWillLeave } from '@ionic/angular';
 import { ITalk } from './interfaces';
 import { TalkroomService } from './talkroom.service';
 import { first } from 'rxjs/operators';
-import { formatDate } from '@angular/common';
+import { Keyboard } from '@capacitor/keyboard';
+import { PluginListenerHandle } from '@capacitor/core';
 
 @Component({
   selector: 'app-talkroom',
   templateUrl: './talkroom.page.html',
   styleUrls: ['./talkroom.page.scss'],
 })
-export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter {
+export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter, ViewWillLeave {
   @ViewChild(IonContent)
   private content: IonContent;
 
@@ -20,12 +21,24 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter {
   public isReady;
   public talks: ITalk[] = [];
 
+  private readonly listenerHandlers: PluginListenerHandle[] = [];
+
   constructor(private talkroomService: TalkroomService, private platform: Platform) {}
 
   ngOnInit() {}
 
   ionViewWillEnter() {
+    if (this.platform.is('capacitor')) {
+      const scrollHandler = Keyboard.addListener('keyboardWillShow', () => this.toBottomAnimation(this.content));
+      this.listenerHandlers.push(scrollHandler);
+    }
     this.isReady = false;
+  }
+
+  ionViewWillLeave() {
+    if (this.platform.is('capacitor')) {
+      this.listenerHandlers.forEach((handler) => handler.remove());
+    }
   }
 
   ionViewDidEnter() {
@@ -91,5 +104,22 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter {
   private async getTalks(lastId: number): Promise<ITalk[]> {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     return this.talkroomService.get(lastId).pipe(first()).toPromise(Promise);
+  }
+
+  private async toBottomAnimation(content: IonContent): Promise<void> {
+    const scrollElement = await this.content.getScrollElement();
+    if (scrollElement.scrollHeight - scrollElement.scrollTop - scrollElement.clientHeight > 200) {
+      return;
+    }
+
+    const startTime = new Date().getTime();
+    const toBottomAnimation = () => {
+      console.log(new Date().getTime() - startTime);
+      if (new Date().getTime() - startTime <= 420) {
+        content.scrollToBottom();
+        requestAnimationFrame(toBottomAnimation);
+      }
+    };
+    requestAnimationFrame(toBottomAnimation);
   }
 }

@@ -1,6 +1,11 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "ionic-pro",
-	"webDir": "www",
-	"bundledWebRuntime": false
+  "appId": "io.ionic.starter",
+  "appName": "ionic-pro",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "Keyboard": {
+      "resize": "none"
+    }
+  }
 }
