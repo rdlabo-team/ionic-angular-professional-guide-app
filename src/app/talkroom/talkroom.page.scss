@@ -16,6 +16,10 @@ ul.talk {
       margin: 0 8px 0 16px;
       width: 64%;
     }
+    .talk-emoji {
+      font-size: 2rem;
+      padding: 16px 16px 0;
+    }
     .talk-created {
       width: 60px;
       font-size: 0.8rem;
@@ -61,10 +65,31 @@ ion-footer > ion-toolbar {
       border: 1px solid var(--ion-color-light-light);
       border-radius: 16px;
     }
+
+    position: relative;
+    ion-buttons {
+      position: absolute;
+      right: -4px;
+      bottom: 0;
+
+      &.ios{
+        right: 4px;
+        bottom: 4px;
+      }
+
+      ion-button {
+        --color: var(--ion-color-dark);
+      }
+    }
   }
 
   ion-buttons {
     margin: 0 2px 8px;
+
+    &.ios{
+      margin-bottom: 12px;
+    }
+
     ion-button {
       --padding-top: 0;
       --padding-bottom: 0;
@@ -73,5 +98,15 @@ ion-footer > ion-toolbar {
         font-size: 1.4rem;
       }
     }
+  }
+}
+
+app-footer-emoji {
+  display: block;
+  max-height: 0;
+  transition: max-height 420ms;
+
+  &.open {
+    max-height: 258px;
   }
 }

@@ -1,0 +1,41 @@
+<ion-toolbar class="emoji-menu" color="light">
+  <ion-text slot="start" class="ion-padding-start ion-padding-end">絵文字</ion-text>
+  <ion-segment
+    [(ngModel)]="selectedEmojiType"
+    (ionChange)="selectedEmojiNum = undefined"
+    mode="md"
+    style="--border-width: 0"
+    scrollable="true"
+  >
+    <ion-segment-button value="history" *ngIf="emojiArray['history'].length > 0">
+      <ion-icon name="time-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="smile">
+      <ion-icon name="happy-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="nature">
+      <ion-icon name="leaf-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="season">
+      <ion-icon name="calendar-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="food">
+      <ion-icon name="fast-food-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="build">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+<ion-toolbar color="light">
+  <ion-buttons class="ion-padding-bottom">
+    <ion-button
+      mode="ios"
+      *ngFor="let emoji of emojiArray[selectedEmojiType]; let i = index"
+      [ngClass]="i === selectedEmojiNum ? 'selected' : ''"
+      (click)="send(emoji, i)"
+    >
+      {{ emoji }}
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>

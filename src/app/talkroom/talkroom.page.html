@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content (click)="onClickOutside()">
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" position="top" *ngIf="talks.length >= 30 && this.isReady">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
@@ -21,7 +21,14 @@
       <ion-avatar slot="start" *ngIf="item.profile.userId !== userId">
         <ion-img [src]="item.profile.photo" alt=""></ion-img>
       </ion-avatar>
-      <div class="talk-body selectable" [innerHTML]="item.body.trim()"></div>
+      <div
+        class="talk-body selectable"
+        *ngIf="!this.isEmojiOnly(item.body); else emojiOnly"
+        [innerHTML]="item.body.trim()"
+      ></div>
+      <ng-template #emojiOnly>
+        <div class="talk-emoji selectable" [innerHTML]="item.body.trim()"></div>
+      </ng-template>
       <span class="talk-created">
         <ng-container *ngIf="item.readCount > 0 && item.profile.userId === userId">既読<br /></ng-container>
         {{ item.createdAt | date: 'a HH:mm' }}
@@ -38,8 +45,14 @@
         autoGrow="true"
         placeholder="トーク"
         required
+        (ionFocus)="isDisplayEmoji = false"
         *ngIf="isReady"
       ></ion-textarea>
+      <ion-buttons>
+        <ion-button class="emoji" fill="clear" (click)="toggleEmoji()">
+          <ion-icon name="happy-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </form>
     <ion-buttons slot="end" class="ion-align-self-end">
       <ion-button fill="clear" color="primary" [disabled]="isLoading || !f.form.valid" (click)="sendTalk(talkBody)">
@@ -47,4 +60,5 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <app-footer-emoji [ngClass]="isDisplayEmoji ? 'open' : ''" (sendEmoji)="sendTalk($event.value)"></app-footer-emoji>
 </ion-footer>

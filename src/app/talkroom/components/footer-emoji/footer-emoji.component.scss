@@ -1,0 +1,30 @@
+.emoji-menu {
+  ion-segment-button {
+    ion-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+ion-buttons {
+  height: calc(258px - 64px);
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  overflow-y: scroll;
+  padding: 8px 0;
+  ion-button {
+    font-size: 2rem !important;
+    width: 40px;
+    height: 40px;
+    margin: 8px 0 8px 16px;
+
+    &.selected {
+      font-size: 3.8rem !important;
+      width: 56px;
+      height: 56px;
+      position: relative;
+      left: 8px;
+      margin: 0;
+    }
+  }
+}
