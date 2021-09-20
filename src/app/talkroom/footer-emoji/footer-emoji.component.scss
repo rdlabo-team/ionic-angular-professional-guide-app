@@ -1,8 +1,6 @@
-.emoji-menu {
-  ion-segment-button {
-    ion-icon {
-      font-size: 1.2rem;
-    }
+ion-segment-button {
+  ion-icon {
+    font-size: 1.2rem;
   }
 }
 ion-buttons {
@@ -13,13 +11,13 @@ ion-buttons {
   overflow-y: scroll;
   padding: 8px 0;
   ion-button {
-    font-size: 2rem !important;
+    font-size: 2rem;
     width: 40px;
     height: 40px;
     margin: 8px 0 8px 16px;
 
     &.selected {
-      font-size: 3.8rem !important;
+      font-size: 3.8rem;
       width: 56px;
       height: 56px;
       position: relative;

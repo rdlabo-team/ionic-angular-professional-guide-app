@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   @ViewChild(IonApp) ionApp: IonApp & {
     el: HTMLElement;
   };
-  constructor(private platform: Platform) {}
+  constructor(private platform: Platform, private storage: StorageService) {}
 
   async ngOnInit() {
     if (this.platform.is('ios') && this.platform.is('capacitor')) {

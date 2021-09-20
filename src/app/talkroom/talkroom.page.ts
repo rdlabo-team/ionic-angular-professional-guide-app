@@ -17,12 +17,12 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter, ViewWi
   @ViewChild(IonContent)
   private content: IonContent;
 
+  public isDisplayEmoji = false;
   public userId = 1;
   public talkBody = '';
   public isLoading = false;
   public isReady;
   public talks: ITalk[] = [];
-  public isDisplayEmoji = false;
 
   private readonly listenerHandlers: PluginListenerHandle[] = [];
 
@@ -58,13 +58,11 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter, ViewWi
       this.isDisplayEmoji = false;
       return;
     }
-    requestAnimationFrame(async () => {
-      this.isDisplayEmoji = true;
-      this.toBottomAnimation(this.content);
-    });
+    this.isDisplayEmoji = true;
+    this.toBottomAnimation(this.content);
   }
 
-  public async onClickOutside() {
+  public async tapEmojiOutside() {
     this.isDisplayEmoji = false;
   }
 

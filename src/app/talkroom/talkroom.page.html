@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content (click)="onClickOutside()">
+<ion-content (click)="tapEmojiOutside()">
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" position="top" *ngIf="talks.length >= 30 && this.isReady">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
@@ -23,7 +23,7 @@
       </ion-avatar>
       <div
         class="talk-body selectable"
-        *ngIf="!this.isEmojiOnly(item.body); else emojiOnly"
+        *ngIf="!isEmojiOnly(item.body); else emojiOnly"
         [innerHTML]="item.body.trim()"
       ></div>
       <ng-template #emojiOnly>

@@ -23,7 +23,7 @@ export class StorageService {
     return this.device?.set(key, value);
   }
 
-  public get(key: string): Promise<any> {
+  public get<T>(key: string): Promise<T> {
     return this.device?.get(key);
   }
 

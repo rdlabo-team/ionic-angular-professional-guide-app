@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { emojiArray, emojiType } from '../../../config/constant';
 import { StorageService } from '../../shared/storage.service';
 import { StorageKeyEnum } from '../../../config/storage-key.enum';
@@ -13,21 +13,16 @@ export class FooterEmojiComponent implements OnInit {
 
   public emojiArray = Object.assign({}, emojiArray);
   public emojiType = emojiType;
-  public selectedEmojiType = 'history';
+  public selectedEmojiType = 'smile';
   public selectedEmojiNum: number = undefined;
 
-  constructor(private elementRef: ElementRef, private storage: StorageService) {}
+  constructor(private storage: StorageService) {}
 
   public async ngOnInit() {
     await this.storage.init();
-    const history = (await this.storage.get(StorageKeyEnum.emoji)) as string[];
-    console.log(['これは？', history]);
+    const history = await this.storage.get<string[]>(StorageKeyEnum.emoji);
     if (history) {
       this.emojiArray.history = history;
-    }
-
-    if (this.emojiArray.history.length === 0) {
-      this.selectedEmojiType = 'smile';
     }
   }
 
