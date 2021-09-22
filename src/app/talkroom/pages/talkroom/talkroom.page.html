@@ -23,7 +23,7 @@
       </ion-avatar>
       <div
         class="talk-body selectable"
-        *ngIf="!isEmojiOnly(item.body); else emojiOnly"
+        *ngIf="!helper.isEmojiOnly(item.body); else emojiOnly"
         [innerHTML]="item.body.trim()"
       ></div>
       <ng-template #emojiOnly>
