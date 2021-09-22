@@ -6,9 +6,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { TalkroomPageRoutingModule } from './talkroom-routing.module';
 
-import { TalkroomPage } from './talkroom.page';
+import { TalkroomPage } from './pages/talkroom/talkroom.page';
 
-import { FooterEmojiComponent } from './footer-emoji/footer-emoji.component';
+import { FooterEmojiComponent } from './components/footer-emoji/footer-emoji.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, TalkroomPageRoutingModule],

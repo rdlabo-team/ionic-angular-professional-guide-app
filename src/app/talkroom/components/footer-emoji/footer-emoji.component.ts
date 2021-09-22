@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { emojiArray, emojiType } from '../../../config/constant';
-import { StorageService } from '../../shared/storage.service';
-import { StorageKeyEnum } from '../../../config/storage-key.enum';
+import { emojiArray, emojiType } from '../../../../config/constant';
+import { StorageService } from '../../../shared/storage.service';
+import { StorageKeyEnum } from '../../../../config/storage-key.enum';
 
 @Component({
   selector: 'app-footer-emoji',

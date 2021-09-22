@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, ViewDidEnter, ViewWillEnter, Platform, ViewWillLeave } from '@ionic/angular';
-import { ITalk } from './interfaces';
-import { TalkroomService } from './talkroom.service';
+import { ITalk } from '../../talkroom.interfaces';
+import { TalkroomService } from '../../services/talkroom.service';
 import { first } from 'rxjs/operators';
 import { Keyboard } from '@capacitor/keyboard';
 import { PluginListenerHandle } from '@capacitor/core';
 
 import split from 'graphemesplit';
+import { HelperService } from '../../../shared/helper.service';
 
 @Component({
   selector: 'app-talkroom',
@@ -26,7 +27,7 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter, ViewWi
 
   private readonly listenerHandlers: PluginListenerHandle[] = [];
 
-  constructor(private talkroomService: TalkroomService, private platform: Platform) {}
+  constructor(private talkroomService: TalkroomService, private platform: Platform, private helper: HelperService) {}
 
   ngOnInit() {}
 
@@ -48,7 +49,7 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter, ViewWi
     this.isReady = true;
     this.getTalks(0).then((data) => {
       this.talks = this.talks.filter((v) => v.id !== 0);
-      this.talks = this.talkroomService.arrayConcatById<ITalk>(this.talks, data, 'id', 'ASC');
+      this.talks = this.helper.arrayConcatById<ITalk>(this.talks, data, 'id', 'ASC');
       requestAnimationFrame(() => this.content.scrollToBottom());
     });
   }
@@ -118,7 +119,7 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter, ViewWi
     // 配列を追加
     const talks = await this.getTalks(this.talks[0].id);
     if (talks.length > 0) {
-      this.talks = this.talkroomService.arrayConcatById<ITalk>(this.talks, talks, 'id', 'ASC');
+      this.talks = this.helper.arrayConcatById<ITalk>(this.talks, talks, 'id', 'ASC');
     }
 
     await Promise.race([
