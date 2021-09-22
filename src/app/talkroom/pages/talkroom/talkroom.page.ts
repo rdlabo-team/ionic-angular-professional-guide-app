@@ -76,12 +76,7 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter, ViewWi
       }),
     );
     requestAnimationFrame(() => this.content.scrollToBottom());
-    const result = this.talkroomService
-      .post(body)
-      .pipe(first())
-      .toPromise(Promise)
-      .catch(() => undefined)
-      .finally(() => (this.isLoading = false));
+    const result = this.talkroomService.postPromise(body).finally(() => (this.isLoading = false));
     if (result === undefined) {
       // 通信に失敗したエラーハンドリング
       return;
@@ -116,6 +111,6 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter, ViewWi
 
   private async getTalks(lastId: number): Promise<ITalk[]> {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    return this.talkroomService.get(lastId).pipe(first()).toPromise(Promise);
+    return this.talkroomService.getPromise(lastId);
   }
 }

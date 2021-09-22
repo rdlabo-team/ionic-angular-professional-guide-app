@@ -3,6 +3,7 @@ import { dummy } from '../dummy';
 import { ITalk } from '../talkroom.interfaces';
 import { formatDate } from '@angular/common';
 import { Observable, of } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,17 @@ export class TalkroomService {
 
   constructor() {
     this.talksAllData = this.createTalksFromDummyText();
+  }
+
+  public getPromise(lastId: number): Promise<ITalk[]> {
+    return this.get(lastId).pipe(first()).toPromise(Promise);
+  }
+
+  public postPromise(body): Promise<boolean> {
+    return this.post(body)
+      .pipe(first())
+      .toPromise(Promise)
+      .catch(() => undefined);
   }
 
   public get(lastId: number): Observable<ITalk[]> {
