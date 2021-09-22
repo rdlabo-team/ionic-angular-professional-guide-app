@@ -1,0 +1,47 @@
+ul.talk {
+  padding: 0 16px;
+  list-style-type: none;
+  li {
+    display: flex;
+    margin-bottom: 16px;
+    align-items: flex-start;
+    ion-avatar {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+    .talk-body {
+      padding: 8px 16px;
+      border-radius: 8px;
+      margin: 0 8px 0 16px;
+      width: 64%;
+    }
+    .talk-emoji {
+      font-size: 2rem;
+      padding: 16px 16px 0;
+    }
+    .talk-created {
+      width: 60px;
+      font-size: 0.8rem;
+      align-self: end;
+    }
+  }
+
+  li.talk-ask {
+    flex-direction: row-reverse;
+    .talk-body {
+      color: var(--ion-color-primary-contrast);
+      background-color: var(--ion-color-primary);
+    }
+    .talk-created {
+      text-align: right;
+    }
+  }
+
+  li.talk-reply {
+    .talk-body {
+      color: var(--ion-color-light-contrast);
+      background-color: var(--ion-color-light);
+    }
+  }
+}

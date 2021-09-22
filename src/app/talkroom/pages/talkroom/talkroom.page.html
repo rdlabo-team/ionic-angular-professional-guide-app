@@ -11,30 +11,7 @@
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" position="top" *ngIf="talks.length >= 30 && this.isReady">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  <div class="ion-text-center ion-padding" *ngIf="talks.length === 0 && this.isReady"><ion-spinner></ion-spinner></div>
-
-  <ul class="talk" *ngIf="talks.length > 0">
-    <li
-      *ngFor="let item of talks; trackBy: trackByFn"
-      class="{{ item.profile.userId === userId ? 'talk-ask' : 'talk-reply' }}"
-    >
-      <ion-avatar slot="start" *ngIf="item.profile.userId !== userId">
-        <ion-img [src]="item.profile.photo" alt=""></ion-img>
-      </ion-avatar>
-      <div
-        class="talk-body selectable"
-        *ngIf="!helper.isEmojiOnly(item.body); else emojiOnly"
-        [innerHTML]="item.body.trim()"
-      ></div>
-      <ng-template #emojiOnly>
-        <div class="talk-emoji selectable" [innerHTML]="item.body.trim()"></div>
-      </ng-template>
-      <span class="talk-created">
-        <ng-container *ngIf="item.readCount > 0 && item.profile.userId === userId">既読<br /></ng-container>
-        {{ item.createdAt | date: 'a HH:mm' }}
-      </span>
-    </li>
-  </ul>
+  <app-talk [talks]="talks" [userId]="userId" [isReady]="isReady"></app-talk>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

@@ -25,8 +25,4 @@ describe('TalkroomPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('絵文字かどうかを検証', () => {
-    expect(component.isEmojiOnly('👀')).toBeTruthy();
-  });
 });

@@ -107,8 +107,6 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter, ViewWi
     event.target.complete();
   }
 
-  public trackByFn = (index, item): number => item.id;
-
   private async getTalks(lastId: number): Promise<ITalk[]> {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     return this.talkroomService.getPromise(lastId);

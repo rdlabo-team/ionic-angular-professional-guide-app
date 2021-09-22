@@ -13,4 +13,8 @@ describe('HelperService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('絵文字かどうかを検証', () => {
+    expect(service.isEmojiOnly('👀')).toBeTruthy();
+  });
 });
