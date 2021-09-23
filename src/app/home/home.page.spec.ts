@@ -11,8 +11,7 @@ describe('HomePage', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [HomePage],
-        imports: [RouterTestingModule, HomePageModule],
+        imports: [HomePageModule, RouterTestingModule],
       }).compileComponents();
 
       fixture = TestBed.createComponent(HomePage);

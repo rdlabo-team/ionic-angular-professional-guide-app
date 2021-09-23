@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { TalkComponent } from './talk.component';
+import { TalkroomPageModule } from '../../talkroom.module';
 
 describe('TalkComponent', () => {
   let component: TalkComponent;
@@ -10,8 +11,7 @@ describe('TalkComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [TalkComponent],
-        imports: [IonicModule.forRoot()],
+        imports: [TalkroomPageModule],
       }).compileComponents();
 
       fixture = TestBed.createComponent(TalkComponent);

@@ -12,7 +12,6 @@ describe('TalkroomPage', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [TalkroomPage],
         imports: [TalkroomPageModule, RouterTestingModule, IonicStorageModule.forRoot()],
       }).compileComponents();
 

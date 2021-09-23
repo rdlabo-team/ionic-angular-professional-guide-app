@@ -13,7 +13,6 @@ describe('FooterEmojiComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [FooterEmojiComponent],
         imports: [TalkroomPageModule],
         providers: [
           {
