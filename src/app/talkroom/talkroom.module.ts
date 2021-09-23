@@ -10,9 +10,10 @@ import { TalkroomPage } from './pages/talkroom/talkroom.page';
 
 import { FooterEmojiComponent } from './components/footer-emoji/footer-emoji.component';
 import { TalkComponent } from './components/talk/talk.component';
+import { TapOutsideDirective } from './directive/tap-outside.directive';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, TalkroomPageRoutingModule],
-  declarations: [TalkroomPage, FooterEmojiComponent, TalkComponent],
+  declarations: [TalkroomPage, FooterEmojiComponent, TalkComponent, TapOutsideDirective],
 })
 export class TalkroomPageModule {}

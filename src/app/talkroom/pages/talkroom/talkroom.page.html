@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content (click)="tapEmojiOutside()">
+<ion-content>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" position="top" *ngIf="talks.length >= 30 && this.isReady">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
@@ -22,11 +22,10 @@
         autoGrow="true"
         placeholder="トーク"
         required
-        (ionFocus)="isDisplayEmoji = false"
         *ngIf="isReady"
       ></ion-textarea>
       <ion-buttons>
-        <ion-button class="emoji" fill="clear" (click)="toggleEmoji()">
+        <ion-button class="emoji exclude-tap-outside" fill="clear" (click)="toggleEmoji()">
           <ion-icon name="happy-outline" slot="icon-only"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -37,5 +36,10 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <app-footer-emoji [ngClass]="isDisplayEmoji ? 'open' : ''" (sendEmoji)="sendTalk($event.value)"></app-footer-emoji>
+  <app-footer-emoji
+    [ngClass]="isDisplayEmoji ? 'open' : ''"
+    (sendEmoji)="sendTalk($event.value)"
+    appTapOutside
+    (tapOutside)="tapEmojiOutside()"
+  ></app-footer-emoji>
 </ion-footer>
