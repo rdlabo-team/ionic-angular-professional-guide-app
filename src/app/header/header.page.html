@@ -1,0 +1,18 @@
+<ion-header #ionHeader class="no-last-child">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>ヘッダー</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  <ion-header #searchHeader>
+    <ion-toolbar><ion-searchbar></ion-searchbar></ion-toolbar>
+  </ion-header>
+
+  <ion-item *ngFor="let item of items">
+    <ion-label>{{ item }}</ion-label>
+  </ion-item>
+</ion-content>

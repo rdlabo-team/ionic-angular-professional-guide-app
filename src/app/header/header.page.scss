@@ -1,0 +1,15 @@
+ion-header.no-last-child {
+  &::after {
+    background-image: none;
+  }
+  ion-toolbar {
+    --border-width: 0;
+  }
+}
+
+ion-content {
+  ion-header ion-toolbar:first-of-type {
+    padding-top: 0;
+  }
+}
+

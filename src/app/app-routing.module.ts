@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'talkroom',
     loadChildren: () => import('./talkroom/talkroom.module').then((m) => m.TalkroomPageModule),
   },
+  {
+    path: 'header',
+    loadChildren: () => import('./header/header.module').then((m) => m.HeaderPageModule),
+  },
 ];
 
 @NgModule({
