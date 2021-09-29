@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { IonContent, ViewDidEnter, ViewWillEnter, Platform, ViewWillLeave } from '@ionic/angular';
 import { ITalk } from '../../talkroom.interfaces';
 import { TalkroomService } from '../../services/talkroom.service';
@@ -28,7 +28,12 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter, ViewWi
 
   private readonly listenerHandlers: PluginListenerHandle[] = [];
 
-  constructor(private talkroomService: TalkroomService, private platform: Platform, public helper: HelperService) {}
+  constructor(
+    private talkroomService: TalkroomService,
+    private platform: Platform,
+    public helper: HelperService,
+    private zone: NgZone,
+  ) {}
 
   ngOnInit() {}
 
@@ -65,7 +70,7 @@ export class TalkroomPage implements OnInit, ViewWillEnter, ViewDidEnter, ViewWi
   }
 
   public async tapEmojiOutside() {
-    this.isDisplayEmoji = false;
+    this.zone.run(() => (this.isDisplayEmoji = false));
   }
 
   async sendTalk(body: string) {
